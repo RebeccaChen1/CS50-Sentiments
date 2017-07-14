@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+import cs50
+import sys
+import helpers
+from analyzer import Analyzer
+from termcolor import colored
+
+# gets string of user's texts
+string = helpers.get_user_timeline(sys.argv[1], count=50)
+
+# analyses score for tweets and prints them out in color
+for i in range(len(string)):
+    analyzer = Analyzer()
+    score = analyzer.analyze(string[i])
+    
+    if score > 0.0:
+        print(colored(string[i], "green"))
+    elif score < 0.0:
+        print(colored(string[i], "red"))
+    else:
+        print(colored(string[i], "yellow"))
